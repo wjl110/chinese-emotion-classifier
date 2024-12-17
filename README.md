@@ -36,6 +36,9 @@ python Emo4.py
 ```bash
 python test_emotion.py
 ```
+
+## 测试样例
+![alt text](/image.png)
 ## 模型说明
 
 - 基础模型：chinese-bert-wwm-ext
