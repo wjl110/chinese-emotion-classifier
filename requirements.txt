@@ -1,1 +1,7 @@
- 
+transformers
+torch
+datasets
+pandas
+numpy
+python-dotenv
+scikit-learn 
