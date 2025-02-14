@@ -74,11 +74,11 @@ print(result)
 - Python 3.12
 - PyTorch
 - Transformers
-- Hugging Face Hub
+- Hugging Face 
 
+# 版权说明
+[![CC BY-NC-ND](https://licensebuttons.net/l/by-nc-nd/4.0/88x31.png)](https://creativecommons.org/licenses/by-nc-nd/4.0/)
 
-
-[![CC BY-NC-ND 4.0][cc-image]][cc-url]
 
 本作品采用 **[知识共享 署名-非商业性使用-禁止演绎 4.0 国际许可协议](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh)** 授权。
 
