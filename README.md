@@ -76,9 +76,18 @@ print(result)
 - Transformers
 - Hugging Face Hub
 
-## License
 
-MIT
+
+[![CC BY-NC-ND 4.0][cc-image]][cc-url]
+
+本作品采用 **[知识共享 署名-非商业性使用-禁止演绎 4.0 国际许可协议](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh)** 授权。
+
+### 条款摘要
+- **您必须署名**：明确标注原作者姓名及作品来源链接
+- **禁止商用**：不得用于任何商业目的（包括广告、付费服务等）
+- **禁止修改**：不得以任何形式改编、转换或二次创作
+
+### 署名格式示例
 
 ## 作者
 
