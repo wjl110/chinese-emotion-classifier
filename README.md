@@ -87,11 +87,9 @@ print(result)
 - **禁止商用**：不得用于任何商业目的（包括广告、付费服务等）
 - **禁止修改**：不得以任何形式改编、转换或二次创作
 
-### 署名格式示例
-
 ## 作者
 
-@[WJL110](https://avatars.githubusercontent.com/u/53851034?v=4)
+@[WJL110](https://github.com/wjl110)
 
 ## 更新日志
 
@@ -99,3 +97,8 @@ print(result)
 - 2024-01: 添加数据增强功能
 - 2024-01: 优化模型性能
 - 2024-01: 集成 Hugging Face Hub
+
+Copyright © [2025] [王健霖]。All rights reserved.
+This code is intended solely for the purpose of patent application and is not licensed for general use or distribution.
+
+
