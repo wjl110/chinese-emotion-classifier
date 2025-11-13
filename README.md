@@ -2,6 +2,14 @@
 
 这是一个基于 BERT 的中文情感分类模型，可以将文本分类为三种情感：快乐、愤怒、悲伤。
 
+## 项目重构说明
+
+本项目已进行代码结构优化，采用模块化设计：
+- ✅ 按功能划分为 `数据处理`、`模型训练`、`API服务`、`测试用例` 四个模块
+- ✅ 删除了冗余的旧版本文件（Emo.py, Emo2.py, Emo3.py）和无关代码
+- ✅ 添加了模型加载器和FastAPI服务支持
+- ✅ 提供了完整的项目依赖配置
+
 # 最佳实践
 ---
 language: zh
@@ -12,7 +20,16 @@ tags:
 license: mit
 ---
 
-## 使用方法
+## 快速开始
+
+运行快速开始示例：
+```bash
+python quick_start.py
+```
+
+或按照下面的分步指南使用：
+
+### 1. 使用 Hugging Face Pipeline（最简单）
 
 ```python
 from transformers import pipeline
@@ -43,6 +60,25 @@ for text in test_texts:
     print(f"\n输入文本: {text}")
     print(f"预测情感: {emotion}")
     print(f"置信度: {confidence:.2f}")
+```
+
+### 2. 使用本项目的模型加载器（推荐）
+
+```python
+from model.model_loader import EmotionClassifier
+
+# 从Hugging Face Hub加载
+classifier = EmotionClassifier(use_hub_model="WJL110/emotion-classifier")
+
+# 预测单个文本
+result = classifier.predict("今天真是太开心了！")
+print(f"情感: {result['emotion']}, 置信度: {result['confidence']:.2f}")
+
+# 批量预测
+texts = ["今天很开心", "我很生气", "感觉很难过"]
+results = classifier.batch_predict(texts)
+for text, result in zip(texts, results):
+    print(f"{text} -> {result['emotion']}")
 ```
 
 ## 项目结构
