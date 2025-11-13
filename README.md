@@ -47,16 +47,36 @@ for text in test_texts:
 
 ## 项目结构
 
-- `Emo.py`: 初始版本情感分类模型
-- `Emo2.py`: 第二版情感分类模型
-- `Emo3.py`: 第三版情感分类模型
-- `Emo4.py`: 最终版本情感分类模型，包含完整的训练和评估功能
-- `test_emotion.py`: 模型测试脚本
-- `t.py`: 辅助测试脚本
-- `emotion_data.csv`: 情感数据集
-- `requirements.txt`: 项目依赖
-- `config.json`: 配置文件
-- `.env`: 环境变量文件（包含敏感信息，不提交到仓库）
+本项目采用模块化设计，目录结构如下：
+
+```
+chinese-emotion-classifier/
+├── data_processing/        # 数据处理模块
+│   ├── __init__.py
+│   ├── emotion_data.csv    # 情感数据集
+│   └── emotion_training.py # 数据预处理和训练工具
+├── model/                  # 模型训练和加载模块
+│   ├── __init__.py
+│   ├── train_model.py      # 模型训练脚本（原Emo4.py）
+│   ├── model_loader.py     # 模型加载器
+│   └── upload_model.py     # 模型上传工具
+├── api_service/            # API接口服务模块
+│   ├── __init__.py
+│   └── app.py              # FastAPI服务
+├── tests/                  # 测试用例模块
+│   ├── __init__.py
+│   ├── test_emotion.py     # 情感分类测试
+│   ├── hug_test.py         # Hugging Face集成测试
+│   └── hugging_test.py     # 模型可用性测试
+└── README.md               # 项目说明文档
+```
+
+### 模块说明
+
+- **data_processing/**: 包含数据集和数据处理相关的代码
+- **model/**: 包含模型训练、加载和上传的代码
+- **api_service/**: 包含API服务实现，提供RESTful接口
+- **tests/**: 包含各种测试用例
 
 ## 安装
 
@@ -65,23 +85,63 @@ for text in test_texts:
 git clone https://github.com/WJL110/chinese-emotion-classifier.git
 cd chinese-emotion-classifier
 ```
+
 2. 安装依赖：
 ```bash
-pip install -r requirements.txt
+pip install transformers torch datasets scikit-learn python-dotenv huggingface-hub
+# API服务依赖（可选）
+pip install fastapi uvicorn pydantic
 ```
+
 ## 使用方法
 
-1. 训练模型：
+### 1. 训练模型
+
 ```bash
-python Emo4.py
-```
-2. 测试模型：
-```bash
-python test_emotion.py
+python -m model.train_model
 ```
 
-## 测试样例
-![alt text](/image.png)
+### 2. 测试模型
+
+```bash
+python -m tests.test_emotion
+```
+
+### 3. 使用模型加载器
+
+```python
+from model.model_loader import EmotionClassifier
+
+# 从Hugging Face Hub加载
+classifier = EmotionClassifier(use_hub_model="WJL110/emotion-classifier")
+
+# 或从本地路径加载
+classifier = EmotionClassifier(model_path="./emotion_model")
+
+# 预测情感
+result = classifier.predict("今天真是太开心了！")
+print(result)
+```
+
+### 4. 启动API服务
+
+```bash
+python -m uvicorn api_service.app:app --reload
+# 访问 http://localhost:8000/docs 查看API文档
+```
+
+API示例：
+```bash
+# 预测单个文本
+curl -X POST "http://localhost:8000/predict" \
+  -H "Content-Type: application/json" \
+  -d '{"text": "今天真是太开心了！"}'
+
+# 批量预测
+curl -X POST "http://localhost:8000/predict/batch" \
+  -H "Content-Type: application/json" \
+  -d '{"texts": ["今天很开心", "我很生气", "感觉很难过"]}'
+```
 ## 模型说明
 
 - 基础模型：chinese-bert-wwm-ext
